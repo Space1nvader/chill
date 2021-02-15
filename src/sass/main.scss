@@ -1,0 +1,212 @@
+@import 'root';
+@import 'media';
+@import 'keyframes';
+@import 'mixins';
+
+html {
+    font-size: 16px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: $font; // FF MAIN
+    cursor: default;
+    background-color: $bgc;
+    color: $gen;
+    @extend %scrollbar;
+}
+
+section {
+    position: relative;
+}
+
+p {
+    color: $text;
+}
+
+ul {
+    list-style: none;
+}
+
+.wrapper {
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    max-width: 1440px;
+}
+
+a {
+    color: $accent;
+    display: inline-block;
+    text-decoration: none;
+}
+
+svg {
+    min-height: 1rem;
+    height: 1rem;
+}
+
+button,
+input,
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: $font;
+    border: none;
+    background: none;
+    outline: none;
+
+    &[disabled] {
+        cursor: default;
+        opacity: 0.7;
+    }
+}
+
+button {
+    cursor: pointer;
+}
+
+// убирает цвет автокомплита у инпута
+input {
+    &:-webkit-autofill,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:hover {
+        font-size: 1rem;
+        -webkit-box-shadow: 0 0 0 1000px transparent inset;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+}
+a{
+    color: #333;
+}
+// Шаблон для модального окна
+// .modal Обязательный класс для всех модальных окон, для попапов используем класс .popup который экстендит(@extend) класс modal или описываем свой.
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    @extend %flexbox;
+    justify-content: center;
+    //Вложенное окно с контентом, необходимо задать фиксированные размерыж
+    &__box {
+        padding: 2rem 3rem;
+        box-sizing: border-box;
+        position: relative;
+        background-color: $bgc;
+        overflow: auto;
+        max-height: 100%;
+        max-width: 100%;
+    }
+    // Кнопка закрытия
+    &__close {
+        @extend %close-btn;
+    }
+}
+.main {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+
+}
+.bg {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    & > img {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+    &::after {
+        z-index: 1;
+        content: '';
+        background-color: #000;
+        opacity: 0.9;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.content {
+    &__classes {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 4rem;
+        padding-left: 10rem;
+        box-sizing: border-box;
+        &Item {
+            text-align: right;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            letter-spacing: 0.2em;
+            margin-right: 1rem;
+        }
+    }
+    &__box {
+        position: relative;
+        width: 50rem;
+        border-radius: 8px;
+        overflow: hidden;
+        padding: 2rem;
+        box-sizing: border-box;
+        height: 30rem;
+        background-color: #f5f5f5;
+        display: flex;
+
+    }
+    &__pepe {
+        height: auto;
+        width: 10rem;
+    }
+    &__title {
+        font-size: 1.125rem;
+        margin-bottom: 0.3rem;
+        color: #333;
+    }
+    &__subtitle {
+        display: block;
+        margin-bottom: 0.4rem;
+        color: gray;
+        &:first-of-type {
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 2.4rem;
+        }
+    }
+    &__text {
+        padding-left: 2rem;
+        font-size: 0.875rem;
+        height: 100%;
+        padding-bottom: 1rem;
+    }
+    &__msg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        align-items: flex-end;
+        display: flex;
+    }
+    &__title {}
+}
